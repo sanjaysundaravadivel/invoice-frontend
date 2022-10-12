@@ -1,0 +1,139 @@
+.Main {
+  height: 100vh;
+  background-image: url("./img/BG_Digiverz\ 1.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.Txt {
+  width: 486px;
+  height: 163px;
+  padding-left: 234px;
+  padding-top: 241px;
+  /* font-family: "Open Sans";
+  font-style: normal; */
+  font-weight: 600;
+  font-size: 35px;
+  line-height: 54px;
+  display: flex;
+  align-items: center;
+  color: #706e6e;
+}
+
+.Homebtn {
+  position: absolute;
+  width: 211px;
+  height: 69px;
+  left: 244px;
+  top: 372px;
+  border: none;
+  background: #f87115;
+  border-radius: 50px;
+  /* font-family: "Open Sans";
+  font-style: normal; */
+  letter-spacing: 0.02em; 
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 27px;
+  color: #ffffff;
+}
+
+.Homebtn span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.Homebtn span:after {
+  content: "\00bb";
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.Homebtn:hover span {
+  padding-right: 25px;
+}
+
+.Homebtn:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+.Tabcol {
+  display: grid;
+  align-content: baseline;
+}
+
+.dot {
+  height: 10px;
+  width: 10px;
+  margin-right: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.ColBtn {
+  background: none;
+  border: none;
+  padding: 0;
+  float: right;
+}
+.Loading {
+  min-height: 200px;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 33px;
+}
+.Empt {
+  min-height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 30px;
+  color: #b4acac;
+}
+.Predictbtn {
+  color: #ffffff;
+  border: 1px solid #f87115;
+  border-radius: 25px;
+  /* height: fit-content; */
+  /* width:25%; */
+  padding-left: 10px;
+  padding-right: 10px;
+  background: #f87115;
+  letter-spacing: 0.02em; 
+  font-weight: 450;
+}
+.Loading {
+  display: flex;
+  align-items: baseline;
+  padding: 5%;
+}
+.TabFooter {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 15px;
+}
+.navbar-toggler-icon {
+  width: 1em !important;
+  height: 1em !important;
+}
+.navbar-toggler {
+  border: none !important;
+}
+.modal-content {
+ 
+  width: fit-content !important;
+}
+@media (min-width: 992px){
+.modal-lg {
+    --bs-modal-width: fit-content !important;
+}
+}
