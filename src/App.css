@@ -163,11 +163,10 @@
  
   width: fit-content !important;
   min-width: 50vw;
- 
-}
-.modal{
   height: 100vh;
+  width: 98% !important;
 }
+
 @media (min-width: 992px){
 .modal-lg {
     --bs-modal-width: fit-content !important;
