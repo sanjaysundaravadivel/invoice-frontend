@@ -4,6 +4,10 @@ export const TestData3 = {
 
     "0.9991922974586487",
   ],
+  category:[
+    "Retail",
+    "NA"
+  ],
 
   date: ["", 0],
 

@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
-import img from "../img/original.png";
+import img from "../img/img2.png";
 import { TestData3 } from "../data";
 const Page3Component = (props) => {
+  var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+
+today = mm + '/' + dd + '/' + yyyy;
   const [data, setData] = useState({
     address: ["", ""],
 
@@ -9,6 +15,7 @@ const Page3Component = (props) => {
     invono: ["", ""],
 
     total: ["", ""],
+    category:["",""]
   });
   const [collapse, setCollapse] = useState(false);
   useEffect(() => {
@@ -67,9 +74,14 @@ const Page3Component = (props) => {
                 </div>
                 <div class="card-body">
                   <h5 class="card-title">Special title treatment</h5>
-                  <img
+                  {/* <img
                     class="card-img-top"
                     src={props.final}
+                    alt="Card image cap"
+                  /> */}
+                   <img
+                    class="card-img-top"
+                    src={img}
                     alt="Card image cap"
                   />
                 </div>
@@ -160,7 +172,7 @@ const Page3Component = (props) => {
                           class="dot"
                           style={{ background: "orange" }}
                         ></span>
-                        Date
+                       Invoice Date
                       </td>
                       <td>
                         <input
@@ -188,9 +200,63 @@ const Page3Component = (props) => {
                         />
                       </td>
                     </tr>
+                    <tr>
+                      <td>
+                        <span
+                          class="dot"
+                          style={{ background: "orange" }}
+                        ></span>
+                        Category
+                      </td>
+                      <td>
+                        <input
+                          style={{ border: "none" }}
+                          className="typing-container"
+                          value={data.category[0]}
+                          readOnly={true}
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span
+                          class="dot"
+                          style={{ background: "orange" }}
+                        ></span>
+                       User
+                      </td>
+                      <td>
+                        <input
+                          style={{ border: "none" }}
+                          className="typing-container"
+                          value="Admin"
+                          readOnly={true}
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span
+                          class="dot"
+                          style={{ background: "orange" }}
+                        ></span>
+                        Submitted date
+                      </td>
+                      <td>
+                        <input
+                          style={{ border: "none" }}
+                          className="typing-container"
+                          value={today}
+                          readOnly={true}
+                        />
+                      </td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
+              <br/>
+              <br/>
+              <br/>
 
               <div className="TabFooter">
                 {" "}

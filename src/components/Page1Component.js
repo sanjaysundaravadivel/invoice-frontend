@@ -30,7 +30,7 @@ const Page1Component = (props) => {
 
   return (
     <>
-      <fieldset>
+      <fieldset className="Upload">
         
 
         <form

@@ -17,7 +17,7 @@ import RectangleComponent from "./RectangleComponent";
 import { Link } from "react-router-dom";
 
 const Page2Component = (props) => {
-  let label = ["Invoice number", "Address", "Date", "Total"];
+  let label = ["Invoice number", "Address", "Date", "Total","Category"];
   const [crop, setCrop] = useState(null);
   const [rect, setRect] = useState(false);
   const [prev, setPrev] = useState(null);
@@ -30,6 +30,7 @@ const Page2Component = (props) => {
 
     total: ["", ""],
     image: "",
+    category:["",""]
   });
   const [edit, setEdit] = useState(-1);
   const [extract, setExtract] = useState('');
@@ -87,7 +88,7 @@ const Page2Component = (props) => {
     const formData1 = new FormData();
     formData1.append("files[]", props.file);
     let res = { data: { image: "" } };
-    res = await axios.post("http://127.0.0.1:5000/predict", formData1);
+    //res = await axios.post("http://127.0.0.1:5000/predict", formData1);-----
     // const byteCharacters = atob(res.data.image);
     // const byteNumbers = new Array(byteCharacters.length);
     // for (let i = 0; i < byteCharacters.length; i++) {
@@ -100,7 +101,7 @@ const Page2Component = (props) => {
     // res.data.image = byteCharacters;
     // var image = new Image();
     // image.src = `data:image/png;base64,${res.data.image}`;
-    // res.data.image = image;
+    // res.data.image = image;------
 
     console.log(res.data);
 
@@ -108,10 +109,12 @@ const Page2Component = (props) => {
     console.log(dat);
     event.preventDefault();
 
-    setImg(`data:image/png;base64,${res.data.image}`);
-    //setImg(img1)
+    //setImg(`data:image/png;base64,${res.data.image}`);
+    setImg(img1)
 
-    setData(res.data);
+    //setData(res.data);----
+
+    setData(TestData3)
 
     setPredicted(false);
     setSpin(false);
@@ -133,8 +136,9 @@ const Page2Component = (props) => {
     const formData2 = new FormData();
     formData2.append("files[]", image);
     let res = { data: "" };
-    res = await axios.post("http://127.0.0.1:5000/crop", formData2);
-    const txt = res.data;
+    //res = await axios.post("http://127.0.0.1:5000/crop", formData2); ---
+    // const txt = res.data;
+    const txt = "26/09/2022"
     setExtract(txt)
     console.log(res.data);
     if (edit == 0) {
@@ -228,7 +232,7 @@ const Page2Component = (props) => {
             currw={currw}
             setCurrh={setCurrh}
             setCurrw={setCurrw}
-          />
+          /> 
         </Modal.Body>
       </Modal>
       {spin ? (
@@ -262,7 +266,7 @@ const Page2Component = (props) => {
                           justifyContent: "space-between",
                         }}
                       >
-                        {disable ? (
+                        {disable && edit!==4 ? (
                           <>
                             {" "}
                             <h5 class="card-title">
@@ -331,15 +335,15 @@ const Page2Component = (props) => {
                       <p className="TabHead">
                         Predicted L<span>ables</span>
                       </p>
-                      <div className="card-body">
+                      <div className="card-body Table">
                         <table class="Tab ">
                           <thead>
                             <th>Label</th>
                             <th>Text</th>
                             <th>Score</th>
-                            <th>
+                            <th >
                               {" "}
-                              <iconify-icon icon="uil:pen"></iconify-icon>{" "}
+                              <span className="Pen"><iconify-icon  icon="uil:pen"></iconify-icon>{" "}</span> 
                             </th>
                           </thead>
                           <tbody>
@@ -368,8 +372,9 @@ const Page2Component = (props) => {
                               <td>
                                 {data.invono[1] == "" ? "---" : data.invono[1]}
                               </td>
-                              <td>
+                              <td >
                                 <button
+                                className="Pen"
                                   onClick={(e) => {
                                     e.preventDefault();
 
@@ -379,9 +384,9 @@ const Page2Component = (props) => {
                                   }}
                                 >
                                   {edit === 0 && disable ? (
-                                    <iconify-icon icon="charm:tick"></iconify-icon>
+                                    <iconify-icon  icon="charm:tick"></iconify-icon>
                                   ) : (
-                                    <iconify-icon icon="uil:pen"></iconify-icon>
+                                    <iconify-icon  icon="uil:pen"></iconify-icon>
                                   )}
                                 </button>
                               </td>
@@ -461,8 +466,9 @@ const Page2Component = (props) => {
                                   ? "---"
                                   : data.address[1]}
                               </td>
-                              <td>
+                              <td >
                                 <button
+                                className="Pen"
                                   onClick={(e) => {
                                     e.preventDefault();
                                     console.log(1);
@@ -472,9 +478,9 @@ const Page2Component = (props) => {
                                   }}
                                 >
                                   {edit === 1 && disable ? (
-                                    <iconify-icon icon="charm:tick"></iconify-icon>
+                                    <iconify-icon  icon="charm:tick"></iconify-icon>
                                   ) : (
-                                    <iconify-icon icon="uil:pen"></iconify-icon>
+                                    <iconify-icon  icon="uil:pen"></iconify-icon>
                                   )}
                                 </button>
                               </td>
@@ -482,7 +488,7 @@ const Page2Component = (props) => {
                             <tr>
                               <td>
                                 <span class="dot" style={setBg(2)}></span>
-                                Date
+                                Invoice  Date
                               </td>
                               <td>
                                 <input
@@ -504,8 +510,9 @@ const Page2Component = (props) => {
                               <td>
                                 {data.date[1] == "" ? "---" : data.date[1]}
                               </td>
-                              <td>
+                              <td >
                                 <button
+                                className="Pen"
                                   onClick={(e) => {
                                     e.preventDefault();
 
@@ -515,9 +522,9 @@ const Page2Component = (props) => {
                                   }}
                                 >
                                   {edit === 2 && disable ? (
-                                    <iconify-icon icon="charm:tick"></iconify-icon>
+                                    <iconify-icon  icon="charm:tick"></iconify-icon>
                                   ) : (
-                                    <iconify-icon icon="uil:pen"></iconify-icon>
+                                    <iconify-icon  icon="uil:pen"></iconify-icon>
                                   )}
                                 </button>
                               </td>
@@ -547,8 +554,9 @@ const Page2Component = (props) => {
                               <td>
                                 {data.total[1] == "" ? "---" : data.total[1]}
                               </td>
-                              <td>
+                              <td >
                                 <button
+                                className="Pen"
                                   onClick={(e) => {
                                     e.preventDefault();
 
@@ -558,9 +566,65 @@ const Page2Component = (props) => {
                                   }}
                                 >
                                   {edit === 3 && disable ? (
-                                    <iconify-icon icon="charm:tick"></iconify-icon>
+                                    <iconify-icon  icon="charm:tick"></iconify-icon>
                                   ) : (
-                                    <iconify-icon icon="uil:pen"></iconify-icon>
+                                    <iconify-icon  icon="uil:pen"></iconify-icon>
+                                  )}
+                                </button>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <span class="dot" style={setBg(3)}></span>
+                                Category
+                              </td>
+                              <td>
+                                {
+                                  edit === 4 && disable ? <select
+                                  style={{ border: "none" }}
+                                  className="typing-container"
+                                  value={data.category[0]}
+                                  onChange={(event) => {
+                                    let temp = data;
+                                    temp.category[0] = event.target.value;
+                                    setTxt(event.target.value);
+                                    setData(temp);
+                                    console.log(temp.category[0]);
+                                  }}
+                                 
+                                >
+                                  <option>Select a Category</option>
+                                  <option value="Retail">Retail</option>
+                                  <option value="Food">Food</option>
+                                  <option value="Electronics">Electronics</option>
+                                </select> :  <input
+                          style={{ border: "none" }}
+                          className="typing-container"
+                          value={data.category[0]}
+                          readOnly={true}
+                        />
+                                }
+                              
+                               
+                              </td>
+                              <td>
+                                {data.category[1] == "" ? "---" : data.category[1]}
+                              </td>
+                              <td >
+                                <button
+                                className="Pen"
+                                  onClick={(e) => {
+                                    e.preventDefault();
+
+                                    setEdit(4);
+                                    setDisable(!disable);
+                                    console.log(disable);
+                                  }}
+                                >
+                                  {edit === 4 && disable ? (
+                                    <iconify-icon  icon="charm:tick"></iconify-icon>
+                                  ) : (
+                                    <iconify-icon  icon="uil:pen"></iconify-icon>
                                   )}
                                 </button>
                               </td>

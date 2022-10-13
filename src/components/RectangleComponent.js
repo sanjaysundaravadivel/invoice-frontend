@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState,useLayoutEffect } from "react";
 import img1 from "../img/img1.png";
 import img2 from "../img/original.png";
 import Button from 'react-bootstrap/Button';
@@ -12,7 +12,10 @@ const RectangleComponent = (props) => {
   console.log("rect comp", props);
   const [modalShow, setModalShow] = useState(true);
   const canvas = useRef();
+  const targetRef = useRef();
   let ctx = null;
+  const[imgh,setImgh]=useState(0)
+  const[imgw,setImgw]=useState(0)
 
   const [myImage, setMyImage] = useState(props.img);
   
@@ -25,6 +28,16 @@ const RectangleComponent = (props) => {
   let setCurrw = props.setCurrw;
 
   // initialize the canvas context
+  useLayoutEffect(() => {
+    if (targetRef.current) {
+         console.log("Before",targetRef.current.offsetWidth,targetRef.current.offsetHeight)
+        
+      //  setCurrh(targetRef.current.offsetHeight)
+      //  setCurrw(targetRef.current.offsetWidth)
+      //  console.log(currh,currw)
+
+    }
+  }, []);
   useEffect(() => {
     console.log(props.img);
     // dynamically assign the width and height to canvas
@@ -36,12 +49,15 @@ const RectangleComponent = (props) => {
     // get context of the canvas
     ctx = canvasEle.getContext("2d");
     const image = document.getElementById("myimg");
+    image.style.height = currh;
+    image.style.width = currw;
+    console.log("After",image)
 
     console.log(currh, currw);
-    ctx.drawImage(image, 0, 0);
+    //ctx.drawImage(image, 0, 0);
 
     const timer = setTimeout(() => {
-      ctx.drawImage(image, 0, 0);
+      ctx.drawImage(image,0,0, currw, currh);
 
       const r1Info = props.coordinates;
       const r1Style = { borderColor: "red", borderWidth: 2 };
@@ -87,12 +103,12 @@ const RectangleComponent = (props) => {
       </Modal.Header>
       <Modal.Body className="show-grid">
         <Container style={{width:"fit-content !important"}}>
-          <Row>
+          <Row style={{paddingRight:"auto",paddingLeft:"auto"}}>
             <Col >
             <canvas ref={canvas} style={{ height: currh, width: currw }}>
-        <img id="myimg" src={myImage} alt=".." />
+        <img ref={targetRef} id="myimg" src={myImage} alt=".." />
       </canvas>
-
+      
             </Col>
             <Col>
               Extracted text:

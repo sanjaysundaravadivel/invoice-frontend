@@ -5,6 +5,37 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+@media screen and (max-width:480px){
+  .Main {
+    background-position: unset;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  .Homebtn{
+    position: unset !important;
+    width: 200px !important;
+    margin-top: 50px;
+    margin-left: 50px;
+  }
+  .uploader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90% !important;
+  }
+  .Pen{
+    margin: auto 20px;
+  }
+  .Table{
+    overflow: scroll;
+  }
+  .TabHead{
+    margin-top: 40px;
+  
+  }
+  }
 .Txt {
   width: 486px;
   height: 163px;
@@ -131,9 +162,17 @@
 .modal-content {
  
   width: fit-content !important;
+  min-width: 50vw;
+ 
+}
+.modal{
+  height: 100vh;
 }
 @media (min-width: 992px){
 .modal-lg {
     --bs-modal-width: fit-content !important;
 }
+}
+.modal{
+  --bs-modal-margin: 0 !important;
 }
