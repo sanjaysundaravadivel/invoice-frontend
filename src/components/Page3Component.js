@@ -98,6 +98,57 @@ today = mm + '/' + dd + '/' + yyyy;
                     <th>Text</th>
                   </thead>
                   <tbody>
+                  <tr>
+                      <td>
+                        <span
+                          class="dot"
+                          style={{ background: "orange" }}
+                        ></span>
+                       User
+                      </td>
+                      <td>
+                        <input
+                          style={{ border: "none" }}
+                          className="typing-container"
+                          value="Admin"
+                          readOnly={true}
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span
+                          class="dot"
+                          style={{ background: "orange" }}
+                        ></span>
+                        Submitted date
+                      </td>
+                      <td>
+                        <input
+                          style={{ border: "none" }}
+                          className="typing-container"
+                          value={today}
+                          readOnly={true}
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span
+                          class="dot"
+                          style={{ background: "orange" }}
+                        ></span>
+                        Category
+                      </td>
+                      <td>
+                        <input
+                          style={{ border: "none" }}
+                          className="typing-container"
+                          value={data.category[0]}
+                          readOnly={true}
+                        />
+                      </td>
+                    </tr>
                     <tr>
                       <td>
                         <span
@@ -111,6 +162,23 @@ today = mm + '/' + dd + '/' + yyyy;
                           style={{ border: "none" }}
                           className="typing-container"
                           value={data.invono[0]}
+                          readOnly={true}
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span
+                          class="dot"
+                          style={{ background: "orange" }}
+                        ></span>
+                       Invoice Date
+                      </td>
+                      <td>
+                        <input
+                          style={{ border: "none" }}
+                          className="typing-container"
+                          value={data.date[0]}
                           readOnly={true}
                         />
                       </td>
@@ -166,23 +234,7 @@ today = mm + '/' + dd + '/' + yyyy;
                         </div>
                       </td>
                     </tr>
-                    <tr>
-                      <td>
-                        <span
-                          class="dot"
-                          style={{ background: "orange" }}
-                        ></span>
-                       Invoice Date
-                      </td>
-                      <td>
-                        <input
-                          style={{ border: "none" }}
-                          className="typing-container"
-                          value={data.date[0]}
-                          readOnly={true}
-                        />
-                      </td>
-                    </tr>
+                    
                     <tr>
                       <td>
                         <span
@@ -200,57 +252,8 @@ today = mm + '/' + dd + '/' + yyyy;
                         />
                       </td>
                     </tr>
-                    <tr>
-                      <td>
-                        <span
-                          class="dot"
-                          style={{ background: "orange" }}
-                        ></span>
-                        Category
-                      </td>
-                      <td>
-                        <input
-                          style={{ border: "none" }}
-                          className="typing-container"
-                          value={data.category[0]}
-                          readOnly={true}
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <span
-                          class="dot"
-                          style={{ background: "orange" }}
-                        ></span>
-                       User
-                      </td>
-                      <td>
-                        <input
-                          style={{ border: "none" }}
-                          className="typing-container"
-                          value="Admin"
-                          readOnly={true}
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <span
-                          class="dot"
-                          style={{ background: "orange" }}
-                        ></span>
-                        Submitted date
-                      </td>
-                      <td>
-                        <input
-                          style={{ border: "none" }}
-                          className="typing-container"
-                          value={today}
-                          readOnly={true}
-                        />
-                      </td>
-                    </tr>
+                    
+                    
                   </tbody>
                 </table>
               </div>

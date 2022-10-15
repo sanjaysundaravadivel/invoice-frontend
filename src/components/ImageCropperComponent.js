@@ -80,23 +80,24 @@ function ImageCropper(props) {
       cropConfig.width,
       cropConfig.height
     );
+   
+    // return new Promise((resolve, reject) => {
+    //   canvas.toBlob((blob) => {
+    //     // returning an error
+    //     if (!blob) {
+    //       reject(new Error("Canvas is empty"));
+    //       return;
+    //     }
 
-    return new Promise((resolve, reject) => {
-      canvas.toBlob((blob) => {
-        // returning an error
-        if (!blob) {
-          reject(new Error("Canvas is empty"));
-          return;
-        }
-
-        blob.name = fileName;
-        // creating a Object URL representing the Blob object given
-        const croppedImageUrl = window.URL.createObjectURL(blob);
-        console.log(croppedImage);
-        resolve(croppedImageUrl);
-      }, "image/jpeg");
-    });
-    console.log(croppedImage);
+    //     blob.name = fileName;
+    //     // creating a Object URL representing the Blob object given
+    //     const croppedImageUrl = window.URL.createObjectURL(blob);
+    //     console.log(croppedImage);
+    //     resolve(croppedImageUrl);
+    //   }, "image/jpeg");
+    // });
+    return canvas.toDataURL("image/png")
+   
   }
 
   return (

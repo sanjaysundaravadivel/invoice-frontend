@@ -30,7 +30,10 @@ const Page2Component = (props) => {
 
     total: ["", ""],
     image: "",
-    category:["",""]
+    category:[
+      "Retail",
+      "NA"
+    ],
   });
   const [edit, setEdit] = useState(-1);
   const [extract, setExtract] = useState('');
@@ -87,8 +90,11 @@ const Page2Component = (props) => {
     console.log(img);
     const formData1 = new FormData();
     formData1.append("files[]", props.file);
-    let res = { data: { image: "" } };
-    //res = await axios.post("http://127.0.0.1:5000/predict", formData1);-----
+    let res = { data: { image: "",category:[
+      "Retail",
+      "NA"
+    ], } };
+    res = await axios.post("https://invoice-api-digiverz.herokuapp.com/predict", formData1);
     // const byteCharacters = atob(res.data.image);
     // const byteNumbers = new Array(byteCharacters.length);
     // for (let i = 0; i < byteCharacters.length; i++) {
@@ -103,18 +109,21 @@ const Page2Component = (props) => {
     // image.src = `data:image/png;base64,${res.data.image}`;
     // res.data.image = image;------
 
-    console.log(res.data);
-
+    console.log("RES",res);
+    res.data.category=[
+      "Retail",
+      "NA"
+    ]
     setDat(dat + 1);
     console.log(dat);
     event.preventDefault();
 
-    //setImg(`data:image/png;base64,${res.data.image}`);
-    setImg(img1)
+    setImg(`data:image/png;base64,${res.data.image}`);
+    //setImg(img1)
 
-    //setData(res.data);----
+    setData(res.data);
 
-    setData(TestData3)
+    //setData(TestData3)
 
     setPredicted(false);
     setSpin(false);
@@ -135,8 +144,16 @@ const Page2Component = (props) => {
     console.log(image);
     const formData2 = new FormData();
     formData2.append("files[]", image);
+    // var reader = new FileReader();
+    // reader.readAsDataURL(image); 
+    // reader.onloadend = function() {
+    //   var base64data = reader.result;                
+    //   console.log("Base64",crop);
+    // }
+    console.log("BBBB")
+    console.log( crop)
     let res = { data: "" };
-    //res = await axios.post("http://127.0.0.1:5000/crop", formData2); ---
+    // res = await axios.post("http://127.0.0.1:5000/crop", formData2); ---
     // const txt = res.data;
     const txt = "26/09/2022"
     setExtract(txt)
@@ -637,6 +654,7 @@ const Page2Component = (props) => {
                     </>
                   )}
                   <div className="TabFooter">
+                    
                     {" "}
                     {predicted ? (
                       <></>
