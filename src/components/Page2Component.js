@@ -264,7 +264,7 @@ const Page2Component = (props) => {
                 <div class="col">
                   <div class="card">
                     <div class="card-header ImgHead">
-                      <p>file name here.pdf</p>
+                      <p>{props.name}</p>
 
                       <button
                         type="button"
@@ -355,7 +355,7 @@ const Page2Component = (props) => {
                       <div className="card-body Table">
                         <table class="Tab ">
                           <thead>
-                            <th>Label</th>
+                            <th class="headcol"> <span style={{backgroundolor: "white"}}>Label</span> </th>
                             <th>Text</th>
                             <th>Score</th>
                             <th >
@@ -365,7 +365,7 @@ const Page2Component = (props) => {
                           </thead>
                           <tbody>
                             <tr>
-                              <td>
+                              <td class="headcol">
                                 <span class="dot" style={setBg(0)}></span>
                                 Invoice No
                               </td>
@@ -409,7 +409,7 @@ const Page2Component = (props) => {
                               </td>
                             </tr>
                             <tr>
-                              <td className="Add">
+                              <td className="Add headcol" >
                                 <span class="dot" style={setBg(1)}></span>
                                 Address
                               </td>
@@ -503,7 +503,7 @@ const Page2Component = (props) => {
                               </td>
                             </tr>
                             <tr>
-                              <td>
+                              <td class="headcol">
                                 <span class="dot" style={setBg(2)}></span>
                                 Invoice  Date
                               </td>
@@ -547,7 +547,7 @@ const Page2Component = (props) => {
                               </td>
                             </tr>
                             <tr>
-                              <td>
+                              <td class="headcol">
                                 <span class="dot" style={setBg(3)}></span>
                                 Total
                               </td>
@@ -591,7 +591,7 @@ const Page2Component = (props) => {
                               </td>
                             </tr>
                             <tr>
-                              <td>
+                              <td class="headcol">
                                 <span class="dot" style={setBg(3)}></span>
                                 Category
                               </td>

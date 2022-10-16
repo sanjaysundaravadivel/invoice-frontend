@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 
 const Page1Component = (props) => {
   const [files, setFiles] = useState([]);
+ 
+  
   let file = props.file;
   let setFile = props.setFile;
+ 
+   
   function overrideEventDefaults(event) {
     event.preventDefault();
     event.stopPropagation();
@@ -52,9 +56,12 @@ const Page1Component = (props) => {
                 props.setFile(e.target.files[0]);
                 props.setIndex(1);
                 console.log(e.target.files);
+                props.setName(e.target.files[0].name)
                 const reader = new FileReader();
-                reader.addEventListener("load", () =>
-                  props.setImg(reader.result.toString() || "")
+                reader.addEventListener("load", () =>{
+                  props.setImg(reader.result.toString() || "");
+                  props.setOrg(reader.result.toString() || "");
+                }
                 );
                 reader.readAsDataURL(e.target.files[0]);
                 console.log(props.img);

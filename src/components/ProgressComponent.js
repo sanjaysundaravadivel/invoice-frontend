@@ -12,7 +12,8 @@ const ProgressComponent = (props) => {
   const [finalData, setFinalData] = useState(null);
   const [final, setMyFinal] = useState(null);
   const [crop, setCrop] = useState(null);
-
+  const [org, setOrg] = useState(null);
+  const [name,setName] = useState(null)
   useEffect(() => {
     console.log(index);
     console.log(file);
@@ -67,6 +68,8 @@ const ProgressComponent = (props) => {
                   setFile={setFile}
                   img={props.img}
                   setImg={props.setImg}
+                  setName={setName}
+                  setOrg={setOrg}
                 />
               </div>
               <div
@@ -87,6 +90,8 @@ const ProgressComponent = (props) => {
                   setCrop={setCrop}
                   crop={crop}
                   final={final}
+                  name={name}
+
                 />
               </div>
               <div
@@ -99,6 +104,7 @@ const ProgressComponent = (props) => {
                   setIndex={setIndex}
                   finalData={finalData}
                   final={final}
+                  org={org}
                 />
               </div>
             </div>

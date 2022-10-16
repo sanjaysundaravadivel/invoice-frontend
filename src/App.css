@@ -11,6 +11,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-image: url("./img/Phonebg.png");
     
   }
   .Homebtn{
@@ -163,8 +164,14 @@
  
   width: fit-content !important;
   min-width: 50vw;
-  height: 100vh;
-  width: 98% !important;
+  min-height: 100vh;
+  height : fit-content !important
+  
+}
+.modal-backdrop.show {
+  min-height: fit-content;
+  min-width: fit-content;
+  
 }
 
 @media (min-width: 992px){
@@ -174,4 +181,17 @@
 }
 .modal{
   --bs-modal-margin: 0 !important;
+  width:fit-content !important
 }
+/* table td:first-child {
+  position: sticky;
+  left: 0;
+  background-color: white;
+  
+} */
+/* table th:first-child {
+  position: sticky;
+  left: 0;
+  
+  
+} */

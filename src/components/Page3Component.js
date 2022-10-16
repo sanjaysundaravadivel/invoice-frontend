@@ -69,11 +69,9 @@ today = mm + '/' + dd + '/' + yyyy;
           <div class="row">
             <div class="col">
               <div class="card">
-                <div class="card-header ImgHead">
-                  <p>file name here.pdf</p>
-                </div>
+                
                 <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
+                  
                   {/* <img
                     class="card-img-top"
                     src={props.final}
@@ -81,7 +79,7 @@ today = mm + '/' + dd + '/' + yyyy;
                   /> */}
                    <img
                     class="card-img-top"
-                    src={img}
+                    src={props.org}
                     alt="Card image cap"
                   />
                 </div>
