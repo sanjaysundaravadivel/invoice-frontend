@@ -14,6 +14,11 @@
     background-image: url("./img/Phonebg.png");
     
   }
+  .modal-dialog {
+  
+    width: 96% !important;
+   
+  }
   .Homebtn{
     position: unset !important;
     width: 200px !important;
@@ -174,7 +179,9 @@
   
 }
 
+
 @media (min-width: 992px){
+  
 .modal-lg {
     --bs-modal-width: fit-content !important;
 }
@@ -182,6 +189,7 @@
 .modal{
   --bs-modal-margin: 0 !important;
   width:fit-content !important
+  
 }
 /* table td:first-child {
   position: sticky;

@@ -56,7 +56,7 @@ const Page1Component = (props) => {
                 props.setFile(e.target.files[0]);
                 props.setIndex(1);
                 console.log(e.target.files);
-                props.setName(e.target.files[0].name)
+                props.setName(e.target.files[0].name.slice(-12))
                 const reader = new FileReader();
                 reader.addEventListener("load", () =>{
                   props.setImg(reader.result.toString() || "");
