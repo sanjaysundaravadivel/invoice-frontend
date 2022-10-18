@@ -674,8 +674,7 @@ const Page2Component = (props) => {
                               <td>
                              
                              ----
-                              
-                                                             </td>
+                            </td>
                               <td>
                                 ------
                               </td>
