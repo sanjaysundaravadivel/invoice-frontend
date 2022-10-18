@@ -52,7 +52,6 @@ const Page1Component = (props) => {
             onChange={(e) => {
               if (e.target.files) {
                 e.preventDefault();
-
                 props.setFile(e.target.files[0]);
                 props.setIndex(1);
                 console.log(e.target.files);

@@ -15,6 +15,7 @@ import Nav_testingComponent from "./components/Nav_testingComponent";
 import RectangleComponent from "./components/RectangleComponent";
 import { useState, useEffect } from "react";
 import ZoomComponent from "./components/ZoomComponent";
+import TableComponent from "./components/TableComponent";
 function App() {
   const [coordinates, setCoordinates] = useState({
     x: 20,
@@ -56,10 +57,7 @@ function App() {
           <Route
             path="/zoom"
             element={
-              <ZoomComponent
-                coordinates={coordinates}
-                setCoordinates={setCoordinates}
-              />
+              <TableComponent/>
             }
           />
         </Routes>

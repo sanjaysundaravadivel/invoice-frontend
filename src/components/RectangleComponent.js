@@ -119,7 +119,7 @@ const RectangleComponent = (props) => {
                   </Container>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={()=>{setModalShow(false);props.setRect(false)}}>Save changes</Button>
+        <Button onClick={()=>{props.setCancel(true);setModalShow(false);props.setRect(false)}}>Save changes</Button>
         <Button onClick={()=>{props.revert();setModalShow(false);props.setRect(false)}}>Discard changes</Button>
       </Modal.Footer>
      

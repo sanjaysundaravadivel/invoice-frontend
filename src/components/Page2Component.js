@@ -7,6 +7,7 @@ import original from "../img/original.png";
 import img1 from "../img/img1.png";
 import img2 from "../img/img2.png"; 
 import ZoomComponent from "./ZoomComponent";
+import TableComponent from "./TableComponent";
 
 import axios from "axios";
 
@@ -18,8 +19,10 @@ import { Link } from "react-router-dom";
 
 const Page2Component = (props) => {
   let label = ["Invoice number", "Address", "Date", "Total","Category"];
+  let label1 = ["invono", "address", "date", "total","Category"];
   const [crop, setCrop] = useState(null);
   const [rect, setRect] = useState(false);
+  const [cancel, setCancel] = useState(false);
   const [prev, setPrev] = useState(null);
   const [predicted, setPredicted] = useState(true);
   const [data, setData] = useState({
@@ -34,6 +37,8 @@ const Page2Component = (props) => {
       "Retail",
       "NA"
     ],
+    headers:[],
+    values:[]
   });
   const [edit, setEdit] = useState(-1);
   const [extract, setExtract] = useState('');
@@ -138,12 +143,20 @@ const Page2Component = (props) => {
     handleClose();
     setSpin(true);
     console.log("Helll", crop);
+    var arr = crop.split(','), mime = arr[0].match(/:(.*?);/)[1],
+    bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+    while(n--){
+    u8arr[n] = bstr.charCodeAt(n);
+    }
+  let imageFile= new File([u8arr], "cropped.png", {type:"image/png"});
+
     var image = new Image();
     image.src = crop;
     //let im = URL.createObjectURL(crop);
-    console.log(image);
+    console.log("Imageee",imageFile);
     const formData2 = new FormData();
-    formData2.append("files[]", image);
+    formData2.append("crop[]", imageFile);
+    formData2.append("label", label[edit]);
     // var reader = new FileReader();
     // reader.readAsDataURL(image); 
     // reader.onloadend = function() {
@@ -153,9 +166,11 @@ const Page2Component = (props) => {
     console.log("BBBB")
     console.log( crop)
     let res = { data: "" };
-    // res = await axios.post("http://127.0.0.1:5000/crop", formData2); ---
-    // const txt = res.data;
-    const txt = "26/09/2022"
+     res = await axios.post("https://invoice-api-digiverz.herokuapp.com/crop", formData2); 
+     console.log("Cropped",res)
+   
+      const txt = res.data;
+    //const txt = "26/09/2022"
     setExtract(txt)
     console.log(res.data);
     if (edit == 0) {
@@ -186,6 +201,7 @@ const Page2Component = (props) => {
       temp.total[1] = "0.99";
       setData(temp);
     }
+   
     setRect(true)
     setPrev(img);
     setSpin(false);
@@ -217,10 +233,10 @@ const Page2Component = (props) => {
               </p>
             );
           } else {
-            if (str != "") {
+            if (str != "" && str!="\f") {
               return (
                 <p style={{ marginBottom: "0" }}>
-                  {str} {index === myArray.length - 2 ? "" : ","}
+                  {str} {myArray[index+1] === '\f' ? "." : ","}
                 </p>
               );
             }
@@ -317,6 +333,8 @@ const Page2Component = (props) => {
                           revert={revert}
                           extract={extract}
                           label={label[edit]}
+                          cancel={cancel}
+                          setCancel={setCancel}
                         />
                       ) 
 }
@@ -645,10 +663,53 @@ const Page2Component = (props) => {
                                   )}
                                 </button>
                               </td>
+                              
                             </tr>
+                            
+                            <tr>
+                              <td class="headcol">
+                                <span class="dot" style={setBg(3)}></span>
+                               Item details
+                              </td>
+                              <td>
+                             
+                             ----
+                              
+                                                             </td>
+                              <td>
+                                ------
+                              </td>
+                              <td >
+                                <button
+                                className="Pen"
+                                  onClick={(e) => {
+                                    e.preventDefault();
+
+                                    setEdit(5);
+                                    setDisable(!disable);
+                                    console.log(disable);
+                                  }}
+                                >
+                                  {edit === 5 && disable ? (
+                                    <iconify-icon  icon="charm:tick"></iconify-icon>
+                                  ) : (
+                                    <iconify-icon  icon="uil:pen"></iconify-icon>
+                                  )}
+                                </button>
+                              </td>
+                              </tr>
                           </tbody>
                         </table>
                       </div>
+                      <div style={edit === 5 && disable ? {} : {display:"none"}}>
+                      <p className="TabHead">
+                        Predicted I<span>tems</span>
+                      </p>
+                      <div className="card-body Table">
+                        <TableComponent headers={data.headers} values={data.values} data={data} setData={setData} />
+                        </div>
+                      </div>
+                     
                       <br />
                       <br />
                     </>
