@@ -54,10 +54,10 @@ today = mm + '/' + dd + '/' + yyyy;
               </p>
             );
           } else {
-            if (str != "") {
+            if (str != "" && str!="\f") {
               return (
                 <p style={{ marginBottom: "0" }}>
-                  {str} {index === myArray.length - 2 ? "" : ","}
+                  {str} {myArray[index+1] === '\f' ? "." : ","}
                 </p>
               );
             }
