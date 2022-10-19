@@ -23,6 +23,7 @@ const Page2Component = (props) => {
   const [crop, setCrop] = useState(null);
   const [rect, setRect] = useState(false);
   const [cancel, setCancel] = useState(false);
+  const [bill , setBill] = useState(false);
   const [prev, setPrev] = useState(null);
   const [predicted, setPredicted] = useState(true);
   const [data, setData] = useState({
@@ -367,6 +368,7 @@ const Page2Component = (props) => {
                     </div>
                   ) : (
                     <>
+                    <div style={bill ? {display:"none"} : {} }  >
                       <p className="TabHead">
                         Predicted L<span>ables</span>
                       </p>
@@ -669,14 +671,14 @@ const Page2Component = (props) => {
                             <tr>
                               <td class="headcol">
                                 <span class="dot" style={setBg(3)}></span>
-                               Item details
+                              Bill 
                               </td>
                               <td>
                              
-                             ----
+                            
                             </td>
                               <td>
-                                ------
+                               
                               </td>
                               <td >
                                 <button
@@ -685,7 +687,8 @@ const Page2Component = (props) => {
                                     e.preventDefault();
 
                                     setEdit(5);
-                                    setDisable(!disable);
+
+                                    setBill(true)
                                     console.log(disable);
                                   }}
                                 >
@@ -697,16 +700,57 @@ const Page2Component = (props) => {
                                 </button>
                               </td>
                               </tr>
+                              
                           </tbody>
                         </table>
+                        <table class="Tab " style={{marginTop:"0",marginLeft:"40px"}} >
+                          <thead>
+                            {
+                                data.headers.map((item)=>{
+                                    return <th style={{borderTop:"none"}}>{item}</th>
+                                })
+                            }
+                           
+                            
+                          </thead>
+                          <tbody>
+                            {
+                               data.values.map((it,index)=>{
+                                return <tr>
+                                 { it.map((dat,ind)=> {
+                                  if(ind>data.headers.length-1){
+                                    return ''
+                                  }
+                                  return  <td> {dat} </td>
+                                 }
+                                                   
+                                                    
+                               )}
+                                </tr>
+                               })
+                            }
+                            </tbody>
+                            </table>
                       </div>
-                      <div style={edit === 5 && disable ? {} : {display:"none"}}>
+                      </div>
+                      <div style={bill ? {} : {display:"none"}}>
                       <p className="TabHead">
-                        Predicted I<span>tems</span>
+                       Bill of M<span>aterials</span>
                       </p>
-                      <div className="card-body Table">
+                      <button
+                        className="Predictbtn"
+                        onClick={(event) => {
+                          event.preventDefault();
+                          setBill(false)
+                        }}
+                      >
+                        {" "}
+                        <span> Save </span>
+                      </button>
+                      <div className="card-body Table" style={{overflowX : "scroll"}}>
                         <TableComponent headers={data.headers} values={data.values} data={data} setData={setData} />
                         </div>
+                     
                       </div>
                      
                       <br />

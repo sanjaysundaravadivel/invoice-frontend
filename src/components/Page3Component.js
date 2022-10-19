@@ -15,7 +15,12 @@ today = mm + '/' + dd + '/' + yyyy;
     invono: ["", ""],
 
     total: ["", ""],
-    category:["",""]
+    category:[
+      "Retail",
+      "NA"
+    ],
+    headers:[],
+    values:[]
   });
   const [collapse, setCollapse] = useState(false);
   useEffect(() => {
@@ -250,10 +255,50 @@ today = mm + '/' + dd + '/' + yyyy;
                         />
                       </td>
                     </tr>
+                    <tr>
+                      <td>
+                        <span
+                          class="dot"
+                          style={{ background: "orange" }}
+                        ></span>
+                       Bill of materials
+                      </td>
+                     
+                    </tr>
                     
                     
                   </tbody>
                 </table>
+                <div style={{overflowX : "scroll"}}>
+                <table class="Tab " style={{marginTop:"0",marginLeft:"40px"}} >
+                          <thead>
+                            {
+                                data.headers.map((item)=>{
+                                    return <th style={{borderTop:"none"}}>{item}</th>
+                                })
+                            }
+                           
+                            
+                          </thead>
+                          <tbody>
+                            {
+                               data.values.map((it,index)=>{
+                                return <tr>
+                                 { it.map((dat,ind)=> {
+                                  if(ind>data.headers.length-1){
+                                    return ''
+                                  }
+                                  return  <td> {dat} </td>
+                                 }
+                                                   
+                                                    
+                               )}
+                                </tr>
+                               })
+                            }
+                            </tbody>
+                            </table>
+                            </div>
               </div>
               <br/>
               <br/>

@@ -5,6 +5,7 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+
 @media screen and (max-width:480px){
   .Main {
     background-position: unset;
@@ -13,6 +14,9 @@
     align-items: center;
     background-image: url("./img/Phonebg.png");
     
+  }
+  .Table{
+    overflow: scroll;
   }
   .modal-dialog {
   

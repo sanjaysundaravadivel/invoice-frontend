@@ -8,12 +8,13 @@ const TableComponent = (props) => {
     const [txt,setTxt]= useState('')
     let data=props.data;
     let setData = props.setData;
+    let i=0;
     
     const setBg = (index) => {
         return { background: "green" }
     }
   return (
-    <table class="Tab ">
+    <table class="Tab " >
                           <thead>
                             {
                                 tdata.headers.map((item)=>{
@@ -33,20 +34,23 @@ const TableComponent = (props) => {
                                 {
                                     tdata.values.map((it,index)=>{
                                         return <tr>
+                                        
                                             {
-                                                
-                                                 it.map((dat)=>{
-                                                    console.log(data)
+                                                    
+                                                 it.map((dat,ind)=>{
+                                                    console.log(dat,ind);
+                                                   
                                                     return  <td> <input
                                                     style={{ border: "none" }}
                                                     className="typing-container"
-                                                    value={dat}
+                                                    value={data.values[index][ind]}
                                                     onChange={(event) => {
                                                       let temp = data;
-                                                      temp.values[index] = event.target.value;
+                                                      temp.values[index][ind] = event.target.value;
                                                       setTxt(event.target.value);
                                                       setData(temp);
-                                                      console.log(temp.invono[0]);
+                                                      console.log(temp);
+                                                     
                                                     }}
                                                     readOnly={
                                                       edit === index && disable ? false : true
