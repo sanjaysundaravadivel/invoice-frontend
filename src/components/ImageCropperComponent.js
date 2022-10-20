@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import ReactCrop from "react-image-crop";
+import ReactCrop, {
+  centerCrop,
+  makeAspectCrop,
+  Crop,
+  PixelCrop,
+} from 'react-image-crop'
+
 import "react-image-crop/dist/ReactCrop.css";
 import img1 from "../img/img1.jpg";
 import { Link } from "react-router-dom";
@@ -9,6 +15,8 @@ function ImageCropper(props) {
   const onImageCropped = (croppedImage) => setCroppedImage(croppedImage);
   const [imageToCrop, setImageToCrop] = useState(props.img);
   const [croppedImage, setCroppedImage] = useState(myRef);
+  const pixelRatio = window.devicePixelRatio;
+
 
   let currh = props.currh;
   let setCurrh = props.setCurrh;
@@ -20,7 +28,7 @@ function ImageCropper(props) {
     // default crop config
     {
       unit: "%",
-      width: 30,
+      width: 90,
       aspect: 16 / 9,
     }
   );
@@ -51,9 +59,10 @@ function ImageCropper(props) {
     const canvas = document.createElement("canvas");
     const scaleX = sourceImage.naturalWidth / sourceImage.width;
     const scaleY = sourceImage.naturalHeight / sourceImage.height;
-    canvas.width = cropConfig.width;
-    canvas.height = cropConfig.height;
+    canvas.width = cropConfig.width * scaleX * pixelRatio;
+    canvas.height = cropConfig.height * scaleY * pixelRatio;
     const ctx = canvas.getContext("2d");
+    
     console.log(
       cropConfig.x,
       cropConfig.y,
@@ -68,7 +77,10 @@ function ImageCropper(props) {
     };
     props.setCoordinates(temp);
     console.log(temp);
-
+    
+    ctx.imageSmoothingQuality = 'high'
+    
+  ctx.scale(pixelRatio, pixelRatio)
     ctx.drawImage(
       sourceImage,
       cropConfig.x * scaleX,
@@ -120,13 +132,13 @@ function ImageCropper(props) {
           <img ref={myRef} src={imageToCrop} alt="" />
         </ReactCrop>
       </div>
-      {/* {croppedImage && (
+      {croppedImage && (
         <div>
           <h2>Cropped Image</h2>
           <img alt="Cropped Img" src={croppedImage} />
         </div>
       )}
-      <Link to="/rect">Go</Link> */}
+      
     </div>
   );
 }

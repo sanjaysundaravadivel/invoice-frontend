@@ -57,7 +57,7 @@ function App() {
           <Route
             path="/zoom"
             element={
-              <TableComponent/>
+              <ZoomComponent/>
             }
           />
         </Routes>

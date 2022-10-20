@@ -11,6 +11,7 @@ import Row from 'react-bootstrap/Row';
 const RectangleComponent = (props) => {
   console.log("rect comp", props);
   const [modalShow, setModalShow] = useState(true);
+  const pixelRatio = window.devicePixelRatio || 1
   const canvas = useRef();
   const targetRef = useRef();
   let ctx = null;
@@ -57,6 +58,9 @@ const RectangleComponent = (props) => {
     //ctx.drawImage(image, 0, 0);
 
     const timer = setTimeout(() => {
+    
+      ctx.imageSmoothingQuality = 'high'
+      ctx.scale(pixelRatio, pixelRatio)
       ctx.drawImage(image,0,0, currw, currh);
 
       const r1Info = props.coordinates;
@@ -79,8 +83,9 @@ const RectangleComponent = (props) => {
     ctx.rect(x, y, w, h);
     ctx.stroke();
     ctx.fillStyle = "red";
+    ctx.imageSmoothingEnabled = false;
     ctx.fillText(props.txt, x, y-2 );
-    setMyFinal(canvas.current.toDataURL("image/png"));
+    setMyFinal(canvas.current.toDataURL("image/png",1));
   };
   const canvasToImg = (_) => {
     let tagA = document.createElement("a");
@@ -105,7 +110,8 @@ const RectangleComponent = (props) => {
         <Container style={{width:"fit-content !important"}}>
           <Row style={{paddingRight:"auto",paddingLeft:"auto"}}>
             <Col >
-            <canvas ref={canvas} style={{ height: currh, width: currw }}>
+            <canvas ref={canvas}  width={currw * pixelRatio}
+  height={currh * pixelRatio} style={{ height: currh, width: currw }}>
         <img ref={targetRef} id="myimg" src={myImage} alt=".." />
       </canvas>
       

@@ -1,8 +1,9 @@
 import React, { useState,useEffect } from "react";
-
+import ZoomComponent from "./ZoomComponent";
 const Page1Component = (props) => {
   const [files, setFiles] = useState([]);
- 
+  const [pdf, setPdf] = useState(false);
+   const [pdfFile,setPdfFile]= useState(null)
   
   let file = props.file;
   let setFile = props.setFile;
@@ -20,14 +21,27 @@ const Page1Component = (props) => {
   const handleFiles = (fileList) => {
     if (fileList) {
       let files = Array.from(fileList);
-      setFiles(files);
-      props.setFile(files[0]);
-      const reader = new FileReader();
-      reader.addEventListener("load", () =>
-        props.setImg(reader.result.toString() || "")
-      );
-      reader.readAsDataURL(files[0]);
-      props.setIndex(1);
+      props.setName(files[0].name.slice(-12))
+      setPdfFile(files[0])
+      console.log(files[0].type)
+      if(files[0].type=="application/pdf"){
+        setPdf(true)
+        
+       }
+       else{
+        setFiles(files);
+        
+        props.setFile(files[0]);
+        const reader = new FileReader();
+        reader.addEventListener("load", () =>
+          props.setImg(reader.result.toString() || "")
+        );
+        reader.readAsDataURL(files[0]);
+        props.setIndex(1);
+       }
+      
+      
+      
       console.log(props.img);
     }
   };
@@ -52,8 +66,18 @@ const Page1Component = (props) => {
             onChange={(e) => {
               if (e.target.files) {
                 e.preventDefault();
+                console.log(e.target.files[0])
+                props.setName(e.target.files[0].name.slice(-12))
+               
+                setPdfFile(e.target.files[0])
+                if(e.target.files[0].type=="application/pdf"){
+                 setPdf(true)
+                
+                 
+                }
+                
+               else{
                 props.setFile(e.target.files[0]);
-                props.setIndex(1);
                 console.log(e.target.files);
                 props.setName(e.target.files[0].name.slice(-12))
                 const reader = new FileReader();
@@ -64,6 +88,9 @@ const Page1Component = (props) => {
                 );
                 reader.readAsDataURL(e.target.files[0]);
                 console.log(props.img);
+                props.setIndex(1);
+               }
+                
               }
             }}
           />
@@ -89,6 +116,9 @@ const Page1Component = (props) => {
             </div>
           </label>
         </form>
+        {
+          pdf? <ZoomComponent setOrg={props.setOrg} setImg={props.setImg} setFile={props.setFile} setPdf={setPdf} file={pdfFile} setIndex={props.setIndex}/> :''
+        }
       </fieldset>
     </>
   );

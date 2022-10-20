@@ -26,6 +26,7 @@ const Page2Component = (props) => {
   const [bill , setBill] = useState(false);
   const [prev, setPrev] = useState(null);
   const [predicted, setPredicted] = useState(true);
+  const [imageFile,setImageFile] = useState(null)
   const [data, setData] = useState({
     address: ["", ""],
 
@@ -149,14 +150,15 @@ const Page2Component = (props) => {
     while(n--){
     u8arr[n] = bstr.charCodeAt(n);
     }
-  let imageFile= new File([u8arr], "cropped.png", {type:"image/png"});
+  let imageFile1= new File([u8arr], "cropped.png", {type:"image/png"});
+  setImageFile(crop);
 
     var image = new Image();
     image.src = crop;
     //let im = URL.createObjectURL(crop);
-    console.log("Imageee",imageFile);
+    console.log("Imageee",imageFile1);
     const formData2 = new FormData();
-    formData2.append("crop[]", imageFile);
+    formData2.append("crop[]", imageFile1);
     formData2.append("label", label[edit]);
     // var reader = new FileReader();
     // reader.readAsDataURL(image); 
@@ -267,6 +269,7 @@ const Page2Component = (props) => {
             setCurrh={setCurrh}
             setCurrw={setCurrw}
           /> 
+          <img src={imageFile}></img>
         </Modal.Body>
       </Modal>
       {spin ? (
