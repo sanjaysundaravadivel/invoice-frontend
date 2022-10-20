@@ -101,7 +101,11 @@ const Page2Component = (props) => {
       "Retail",
       "NA"
     ], } };
-    res = await axios.post("https://invoice-api-digiverz.herokuapp.com/predict", formData1);
+    try {
+      res = await axios.post("https://invoice-api-digiverz.herokuapp.com/predict", formData1);
+    } catch (error) {
+      window.alert("Some thing went wrong please try again")
+    }
     // const byteCharacters = atob(res.data.image);
     // const byteNumbers = new Array(byteCharacters.length);
     // for (let i = 0; i < byteCharacters.length; i++) {
@@ -169,7 +173,11 @@ const Page2Component = (props) => {
     console.log("BBBB")
     console.log( crop)
     let res = { data: "" };
-     res = await axios.post("https://invoice-api-digiverz.herokuapp.com/crop", formData2); 
+     try {
+      res = await axios.post("https://invoice-api-digiverz.herokuapp.com/crop", formData2); 
+     } catch (error) {
+      window.alert("Some thing went wrong please try again")
+     }
      console.log("Cropped",res)
    
       const txt = res.data;
