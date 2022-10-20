@@ -60,15 +60,15 @@ const RectangleComponent = (props) => {
     const timer = setTimeout(() => {
     
       ctx.imageSmoothingQuality = 'high'
-      ctx.scale(pixelRatio, pixelRatio)
-      ctx.drawImage(image,0,0,imgw,imgh,0,0, currw, currh);
+      //ctx.scale(pixelRatio, pixelRatio)
+      ctx.drawImage(image,0,0, currw, currh);
 
       const r1Info = props.coordinates;
       const r1Style = { borderColor: "red", borderWidth: 2 };
       drawRect(r1Info, r1Style);
-      props.setImg(canvasEle.toDataURL("image/png"));
-      setMyImage(canvasEle.toDataURL("image/png"));
-      setMyFinal(canvasEle.toDataURL("image/png"));
+      props.setImg(canvasEle.toDataURL("image/png",1));
+      setMyImage(canvasEle.toDataURL("image/png",1));
+      setMyFinal(canvasEle.toDataURL("image/png",1));
     }, 1000);
   }, []);
 

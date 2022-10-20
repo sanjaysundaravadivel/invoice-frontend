@@ -108,7 +108,7 @@ function ImageCropper(props) {
     //     resolve(croppedImageUrl);
     //   }, "image/jpeg");
     // });
-    return canvas.toDataURL("image/png")
+    return canvas.toDataURL("image/png",1)
    
   }
 
@@ -132,12 +132,7 @@ function ImageCropper(props) {
           <img ref={myRef} src={imageToCrop} alt="" />
         </ReactCrop>
       </div>
-      {croppedImage && (
-        <div>
-          <h2>Cropped Image</h2>
-          <img alt="Cropped Img" src={croppedImage} />
-        </div>
-      )}
+      
       
     </div>
   );
