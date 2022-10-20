@@ -33,9 +33,9 @@ const RectangleComponent = (props) => {
     if (targetRef.current) {
          console.log("Before",targetRef.current.offsetWidth,targetRef.current.offsetHeight)
         
-      //  setCurrh(targetRef.current.offsetHeight)
-      //  setCurrw(targetRef.current.offsetWidth)
-      //  console.log(currh,currw)
+       setImgh(targetRef.current.offsetHeight)
+       setImgw(targetRef.current.offsetWidth)
+       //console.log(currh,currw)
 
     }
   }, []);
@@ -61,7 +61,7 @@ const RectangleComponent = (props) => {
     
       ctx.imageSmoothingQuality = 'high'
       ctx.scale(pixelRatio, pixelRatio)
-      ctx.drawImage(image,0,0, currw, currh);
+      ctx.drawImage(image,0,0,imgw,imgh,0,0, currw, currh);
 
       const r1Info = props.coordinates;
       const r1Style = { borderColor: "red", borderWidth: 2 };
