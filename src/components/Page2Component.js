@@ -102,6 +102,7 @@ const Page2Component = (props) => {
       res = await axios.post("https://invoice-api-digiverz.herokuapp.com/predict", formData1);
     } catch (error) {
       window.alert("Some thing went wrong please try again")
+      window.location.reload();
     }
     // const byteCharacters = atob(res.data.image);
     // const byteNumbers = new Array(byteCharacters.length);
