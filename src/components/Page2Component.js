@@ -97,10 +97,7 @@ const Page2Component = (props) => {
     console.log(img);
     const formData1 = new FormData();
     formData1.append("files[]", props.file);
-    let res = { data: { image: "",category:[
-      "Retail",
-      "NA"
-    ], } };
+    let res = { data: { image: "", } };
     try {
       res = await axios.post("https://invoice-api-digiverz.herokuapp.com/predict", formData1);
     } catch (error) {
@@ -121,10 +118,7 @@ const Page2Component = (props) => {
     // res.data.image = image;------
 
     console.log("RES",res);
-    res.data.category=[
-      "Retail",
-      "NA"
-    ]
+   
     setDat(dat + 1);
     console.log(dat);
     event.preventDefault();
