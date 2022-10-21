@@ -36,8 +36,8 @@ const Page2Component = (props) => {
     total: ["", ""],
     image: "",
     category:[
-      "Retail",
-      "NA"
+      "",
+      ""
     ],
     headers:[],
     values:[]
@@ -97,12 +97,24 @@ const Page2Component = (props) => {
     console.log(img);
     const formData1 = new FormData();
     formData1.append("files[]", props.file);
-    let res = { data: { image: "", } };
+    let res = { data: {  address: ["", ""],
+
+    date: ["", ""],
+    invono: ["", ""],
+
+    total: ["", ""],
+    image: "",
+    category:[
+      "",
+      ""
+    ],
+    headers:[],
+    values:[] } };
     try {
       res = await axios.post("https://invoice-api-digiverz.herokuapp.com/predict", formData1);
     } catch (error) {
       window.alert("Some thing went wrong please try again")
-      window.location.reload();
+      //window.location.reload();
     }
     // const byteCharacters = atob(res.data.image);
     // const byteNumbers = new Array(byteCharacters.length);
@@ -130,9 +142,9 @@ const Page2Component = (props) => {
     setData(res.data);
 
     //setData(TestData3)
-
-    setPredicted(false);
     setSpin(false);
+    setPredicted(false);
+    
   };
 
   useEffect(() => {
