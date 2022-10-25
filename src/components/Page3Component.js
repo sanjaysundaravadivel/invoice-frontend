@@ -265,15 +265,16 @@ today = mm + '/' + dd + '/' + yyyy;
                      
                     </tr>
                     
-                    
+                    <br/>
                   </tbody>
                 </table>
                 <div style={{overflowX : "scroll"}}>
-                <table class="Tab " style={{marginTop:"0",marginLeft:"40px"}} >
+                <table class="Tab " style={{marginTop:"0",marginLeft:"40px" ,     background: "#eee",
+    borderBottom: "2px solid #adb5bd",boxShadow:"2px 2px 4px 4px #adb5bd"}} >
                           <thead>
                             {
                                 data.headers.map((item)=>{
-                                    return <th style={{borderTop:"none"}}>{item}</th>
+                                    return <th style={{borderTop:"none",padding:"11px 11px",fontSize:"unset"}}>{item}</th>
                                 })
                             }
                            
@@ -295,7 +296,12 @@ today = mm + '/' + dd + '/' + yyyy;
                                      }
                                      else{
                                       console.log(it)
-                                      return  <td> {it[ind-le]} </td>
+                                      return  <td style={index!==data.values.length-1?{ padding: "15px",
+                                      background: "#eee",
+                                      borderBottom: "1px solid #fff"}:{padding: "15px",
+                                      background: "rgb(30 30 30 / 85%)",
+                                      color: "#ffffff",
+                                      borderBottom: "1px solid #fff"}}> {it[ind-le]} </td>
                                      }
                                      }
                                                        
@@ -307,7 +313,11 @@ today = mm + '/' + dd + '/' + yyyy;
                                 return <tr>
                                  { it.map((dat,ind)=> {
                                  
-                                  return  <td> {dat} </td>
+                                  return  <td style={ind!==it.length-1?{ padding: "15px",
+                                  background: "#eee",
+                                  borderBottom: "1px solid #fff"}:{color:"black",
+                                  borderBottom: "1px solid #fff",
+                                    background: "#ddd"}}> {dat} </td>
                                  }
                                                    
                                                     
@@ -317,6 +327,7 @@ today = mm + '/' + dd + '/' + yyyy;
                             }
                             </tbody>
                             </table>
+                            <br/>
                             </div>
               </div>
               <br/>
