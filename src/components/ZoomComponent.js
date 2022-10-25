@@ -72,8 +72,8 @@ context.imageSmoothingQuality = 'high'
     <Modal show={show} onHide={handleClose}  size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       className='modal-dialog-centered' style={{minWidth:"100vw"}}>
-    <Modal.Header closeButton>
-      <Modal.Title>Select the page you want to predict</Modal.Title>
+    <Modal.Header closeButton >
+      <Modal.Title style={{fontStyle:"italic"}}>Select the page you want to predict</Modal.Title>
       
     </Modal.Header>
     <Modal.Body> 
@@ -96,13 +96,16 @@ context.imageSmoothingQuality = 'high'
  
 </Modal.Body>
 <Modal.Footer>
-<Button style={{background: "#ffffff",
-    border: "1px solid #f87115",
-    borderRadius: "25px",
-    fontWeight: "600",
-    height: "fit-content",
-   
-    color: "#f87115"}}  onClick={()=>{
+<Button style={{ color: "#ffffff",
+  border: "1px solid #f87115",
+  borderRadius: "15px",
+  padding: "8px 25px",
+  textTransform: "uppercase",
+  fontSize: "13px",
+  fontWeight: "500",
+  letterSpacing: "1px",
+  background: "#f87115"
+  }}  onClick={()=>{
         console.log(index)
         props.setImg(imglist[index])
         props.setOrg(imglist[index])

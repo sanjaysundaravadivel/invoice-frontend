@@ -100,33 +100,46 @@ const RectangleComponent = (props) => {
   return (
    
       
-       <Modal style={{width:"fit-content"}} show={modalShow} onHide={() => {setModalShow(false);props.setRect(false)}} size="lg" aria-labelledby="contained-modal-title-vcenter">
+       <Modal style={{minWidth:"100vw"}} show={modalShow} onHide={() => {setModalShow(false);props.setRect(false)}} size="lg" aria-labelledby="contained-modal-title-vcenter">
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-         Successfully Extracted text for {props.label}
+        <Modal.Title id="contained-modal-title-vcenter" style={{    fontStyle: "italic",
+    fontSize: "18px",    fontWeight: "bold"}}>
+         Successfully Extracted text for {props.label} as {props.extract}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="show-grid">
         <Container style={{width:"fit-content !important"}}>
-          <Row style={{paddingRight:"auto",paddingLeft:"auto"}}>
-            <Col >
+        
             <canvas ref={canvas}  width={currw * pixelRatio}
   height={currh * pixelRatio} style={{ height: currh, width: currw }}>
         <img ref={targetRef} id="myimg" src={myImage} alt=".." />
       </canvas>
       
-            </Col>
-            <Col>
-              Extracted text:
-              {props.extract}
-            </Col>
-          </Row>
+         
 
                   </Container>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={()=>{props.setCancel(true);setModalShow(false);props.setRect(false)}}>Save changes</Button>
-        <Button onClick={()=>{props.revert();setModalShow(false);props.setRect(false)}}>Discard changes</Button>
+        <Button style={{ color: "#ffffff",
+  border: "1px solid #f87115",
+  borderRadius: "15px",
+  padding: "8px 25px",
+  textTransform: "uppercase",
+  fontSize: "13px",
+  fontWeight: "500",
+  letterSpacing: "1px",
+  background: "#f87115"
+  }}  onClick={()=>{props.setCancel(true);setModalShow(false);props.setRect(false)}}>Save changes</Button>
+        <Button style={{ background: "#ffffff",
+  border: "1px solid #f87115",
+  borderRadius: "15px",
+  padding: "8px 25px",
+  textTransform: "uppercase",
+  fontSize: "13px",
+  fontWeight: "500",
+  letterSpacing: "1px",
+  color: "#f87115"
+  }} onClick={()=>{props.revert();setModalShow(false);props.setRect(false)}}>Discard changes</Button>
       </Modal.Footer>
      
     </Modal>

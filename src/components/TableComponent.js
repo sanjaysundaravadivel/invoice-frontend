@@ -33,6 +33,60 @@ const TableComponent = (props) => {
                              
                                 {
                                     tdata.values.map((it,index)=>{
+                                      if(it.length>data.headers.length){
+                                        return ''
+                                      }
+                                      if(it.length<data.headers.length){
+                                        let le=data.headers.length - it.length   
+                                        return <tr>                 
+                                          { data.headers.map((dat,ind)=> {
+                                       
+                                           if(ind<le){
+                                            return  <td>  </td>
+                                           }
+                                           else{
+                                            console.log(it[ind-le])
+                                            return  <td> <input
+                                            style={{ border: "none" }}
+                                            className="typing-container"
+                                            value={data.values[index][ind-le]}
+                                            onChange={(event) => {
+                                              let temp = data;
+                                              temp.values[index][ind-le] = event.target.value;
+                                              setTxt(event.target.value);
+                                              setData(temp);
+                                              console.log(temp);
+                                             
+                                            }}
+                                            readOnly={
+                                              edit === index && disable ? false : true
+                                            }
+                                          /> </td>
+                                           }
+                                           }
+                                                             
+                                                              
+                                         )}
+                                         <td >
+                                <button
+                                className="Pen"
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    setEdit(index);
+                                    setDisable(!disable);
+                                    console.log(disable);
+                                  }}
+                                >
+                                  {edit === index && disable ? (
+                                    <iconify-icon  icon="charm:tick"></iconify-icon>
+                                  ) : (
+                                    <iconify-icon  icon="uil:pen"></iconify-icon>
+                                  )}
+                                </button>
+                              </td>
+                                            </tr> 
+                                      }
+
                                         return <tr>
                                         
                                             {

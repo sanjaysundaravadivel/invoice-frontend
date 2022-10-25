@@ -19,11 +19,12 @@ function Nav_testingComponent() {
       {/* false, 'sm', 'md', 'lg', 'xl', 'xxl' */}
       {[false].map((expand) => (
         <Navbar
-        // fixed="top"
+          fixed="top"
           class="navbar_custom"
           key={expand}
           expand={expand}
           className="shadow-sm "
+          style={{background:"white"}}
         >
           <Container fluid>
             <Navbar.Brand class=" p-2 ">

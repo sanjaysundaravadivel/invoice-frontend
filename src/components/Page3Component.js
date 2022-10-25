@@ -281,13 +281,33 @@ today = mm + '/' + dd + '/' + yyyy;
                             
                           </thead>
                           <tbody>
-                            {
+                          {
                                data.values.map((it,index)=>{
+                                if(it.length>data.headers.length){
+                                  return ''
+                                }
+                                if(it.length<data.headers.length){
+                                  let le=data.headers.length - it.length   
+                                  return <tr>                 
+                                    { data.headers.map((dat,ind)=> {
+                                 
+                                     if(ind<le){
+                                      return  <td>  </td>
+                                     }
+                                     else{
+                                      console.log(it)
+                                      return  <td> {it[ind-le]} </td>
+                                     }
+                                     }
+                                                       
+                                                        
+                                   )}
+                                      </tr> 
+                                }
+                               
                                 return <tr>
                                  { it.map((dat,ind)=> {
-                                  if(ind>data.headers.length-1){
-                                    return ''
-                                  }
+                                 
                                   return  <td> {dat} </td>
                                  }
                                                    
@@ -308,12 +328,17 @@ today = mm + '/' + dd + '/' + yyyy;
                 {" "}
                 <button
                   className="Predictbtn"
-                  style={{
-                    marginRight: "40px",
-                    background: "white",
-                    padding: "0 20px",
-                    color: "#f87115",
-                  }}
+                  style={{ background: "#ffffff",
+  border: "1px solid #f87115",
+  borderRadius: "15px",
+  padding: "8px 25px",
+  textTransform: "uppercase",
+  fontSize: "13px",
+  fontWeight: "500",
+  letterSpacing: "1px",
+  color: "#f87115",
+  marginRight:"40px"
+  }}
                   onClick={(event) => {
                     event.preventDefault();
 

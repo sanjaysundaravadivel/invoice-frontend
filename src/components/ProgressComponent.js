@@ -31,7 +31,7 @@ const ProgressComponent = (props) => {
           <Nav_testingComponent />
           {/* </div> */}
 
-          <ul id="progressbar" class=" p-4 ">
+          <ul id="progressbar" class=" p-4 " style={{marginTop:"70px"}}>
             <li
               className={index >= 0 ? " active" : ""}
               style={index == 0 ? { color: "red" } : {}}

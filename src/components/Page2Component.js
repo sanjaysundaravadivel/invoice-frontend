@@ -21,6 +21,8 @@ const Page2Component = (props) => {
   let label = ["Invoice number", "Address", "Date", "Total","Category"];
   let label1 = ["invono", "address", "date", "total","Category"];
   const [crop, setCrop] = useState(null);
+  const [prevTxt, setPrevTxt] = useState('');
+  const [prevScore, setPrevScore] = useState('');
   const [rect, setRect] = useState(false);
   const [cancel, setCancel] = useState(false);
   const [bill , setBill] = useState(false);
@@ -110,6 +112,7 @@ const Page2Component = (props) => {
     ],
     headers:[],
     values:[] } };
+    //res.data=TestData3
     try {
       res = await axios.post("https://invoice-api-digiverz.herokuapp.com/predict", formData1);
     } catch (error) {
@@ -224,7 +227,31 @@ const Page2Component = (props) => {
     setPrev(img);
     setSpin(false);
   };
-  const revert = () => setImg(prev);
+  const revert = () => {setImg(prev);
+    if (edit == 0) {
+      let temp = data;
+      temp.invono[0] = prevTxt;
+      temp.invono[1] = prevScore;
+      setData(temp);
+    }
+    if (edit == 1) {
+      let temp = data;
+      temp.address[0] = prevTxt;
+      temp.address[1] = prevScore;
+      setData(temp);
+    }
+    if (edit == 2) {
+      let temp = data;
+      temp.date[0] = prevTxt;
+      temp.date[1] = prevScore;
+      setData(temp);
+    }
+    if (edit == 3) {
+      let temp = data;
+      temp.total[0] = prevTxt;
+      temp.total[1] = prevScore;
+      setData(temp);
+    }};
   const handleClose = () => setShow(false);
   const add = (text) => {
     const myArray = text.split("\n");
@@ -297,35 +324,32 @@ const Page2Component = (props) => {
             <div class="container" style={{ minHeight: "731px" }}>
               <div class="row">
                 <div class="col">
-                  <div class="card">
-                    <div class="card-header ImgHead">
-                      <p>{props.name}</p>
-
-                      <button
-                        type="button"
-                        class=""
-                        onClick={() => {
-                          props.setIndex(0);
-                        }}
-                      >
-                        Change File
-                      </button>
-                    </div>
-                    <div class="card-body">
+                  <div class="">
+                  
+                    <div class="">
                       <div
                         style={{
                           display: "flex",
                           justifyContent: "space-between",
                         }}
                       >
-                        {disable && edit!==4 ? (
+                        {disable && edit!==4 && edit!=5 ? (
                           <>
                             {" "}
-                            <h5 class="card-title">
+                            <h5 class="card-title" style={{fontFamily: `Arial, "Helvetica Neue", Helvetica, sans-serif`,fontStyle:"italic"}}>
                               Select value for {label[edit]}
                             </h5>
                             <Button
-                              className="SelectLabels"
+                             style={{ color: "#ffffff",
+                             border: "1px solid #f87115",
+                             borderRadius: "15px",
+                             padding: "8px 25px",
+                             textTransform: "uppercase",
+                             fontSize: "13px",
+                             fontWeight: "500",
+                             letterSpacing: "1px",
+                             background: "#f87115"
+                             }}
                               onClick={() => handleShow("xxl-down")}
                             >
                               Select Text
@@ -358,31 +382,50 @@ const Page2Component = (props) => {
                       ) 
 }
                       {
-                        img && ( <img
+                        img && ( 
+                          <div class="member" data-aos="zoom-in" data-aos-delay="100">
+                          <div class="about-img">
+                          <img
                           class="card-img-top"
                           src={img}
                           alt="Card image cap"
-                        />)
+                        />
+                         <div class="member-info">
+                <div class="member-info-content">
+                  <h4> <button
+                        type="button"
+                        class="Predictbtn"
+                        onClick={() => {
+                          props.setIndex(0);
+                          window.location.reload()
+                        }}
+                      >
+                        Change File
+                      </button></h4>
+                  <span>{props.name}</span>
+                </div>
+              
+              </div>
+                          </div>
+                        </div>
+                        )
                       }
                     </div>
-                    <div
-                      class="card-footer text-muted"
-                      style={{ display: "flex", justifyContent: "end" }}
-                    >
-                      {" "}
-                      <button className="Predictbtn" onClick={predictlabel}>
-                        {" "}
-                        <span> Predict Lables </span>
-                      </button>
-                    </div>
+                   
                   </div>
                 </div>
                 <div class="Tabcol col card" style={{ border: "none" }}>
                   {predicted ? (
                     <div className="Empt">
                       <p>
-                        Tap predict labels to extract the label and text ...!
+                        Tap the button to extract the label and text ...!
                       </p>
+                      <div class="col-lg-4 d-flex align-items-center justify-content-center position-relative" style={{width: "100%"}} data-aos="zoom-in" data-aos-delay="200">
+                      <button className="glightbox play-btn" onClick={predictlabel}>
+                        {" "}
+                       
+                      </button>
+                      </div>
                     </div>
                   ) : (
                     <>
@@ -432,7 +475,8 @@ const Page2Component = (props) => {
                                 className="Pen"
                                   onClick={(e) => {
                                     e.preventDefault();
-
+                                    setPrevTxt(data.invono[0])
+                                    setPrevScore(data.invono[1])
                                     setEdit(0);
                                     setDisable(!disable);
                                     console.log(disable);
@@ -526,6 +570,8 @@ const Page2Component = (props) => {
                                 className="Pen"
                                   onClick={(e) => {
                                     e.preventDefault();
+                                    setPrevTxt(data.address[0])
+                                    setPrevScore(data.address[1])
                                     console.log(1);
                                     setEdit(1);
                                     setDisable(!disable);
@@ -570,7 +616,8 @@ const Page2Component = (props) => {
                                 className="Pen"
                                   onClick={(e) => {
                                     e.preventDefault();
-
+                                    setPrevTxt(data.date[0])
+                                    setPrevScore(data.date[1])
                                     setEdit(2);
                                     setDisable(!disable);
                                     console.log(disable);
@@ -614,7 +661,8 @@ const Page2Component = (props) => {
                                 className="Pen"
                                   onClick={(e) => {
                                     e.preventDefault();
-
+                                    setPrevTxt(data.total[0])
+                                    setPrevScore(data.total[1])
                                     setEdit(3);
                                     setDisable(!disable);
                                     console.log(disable);
@@ -649,6 +697,7 @@ const Page2Component = (props) => {
                                  
                                 >
                                   <option>Select a Category</option>
+                                  <option value="Automotive">Automotive</option>
                                   <option value="Retail">Retail</option>
                                   <option value="Food">Food</option>
                                   <option value="Electronics">Electronics</option>
@@ -734,11 +783,31 @@ const Page2Component = (props) => {
                           <tbody>
                             {
                                data.values.map((it,index)=>{
+                                if(it.length>data.headers.length){
+                                  return ''
+                                }
+                                if(it.length<data.headers.length){
+                                  let le=data.headers.length - it.length   
+                                  return <tr>                 
+                                    { data.headers.map((dat,ind)=> {
+                                 
+                                     if(ind<le){
+                                      return  <td>  </td>
+                                     }
+                                     else{
+                                      console.log(it)
+                                      return  <td> {it[ind-le]} </td>
+                                     }
+                                     }
+                                                       
+                                                        
+                                   )}
+                                      </tr> 
+                                }
+                               
                                 return <tr>
                                  { it.map((dat,ind)=> {
-                                  if(ind>data.headers.length-1){
-                                    return ''
-                                  }
+                                 
                                   return  <td> {dat} </td>
                                  }
                                                    
@@ -767,6 +836,7 @@ const Page2Component = (props) => {
                       </button>
                       <div className="card-body Table" style={{overflowX : "scroll"}}>
                         <TableComponent headers={data.headers} values={data.values} data={data} setData={setData} />
+                       
                         </div>
                      
                       </div>
@@ -775,6 +845,9 @@ const Page2Component = (props) => {
                       <br />
                     </>
                   )}
+                   <br/>
+                        <br/>
+                        <br/>
                   <div className="TabFooter">
                     
                     {" "}

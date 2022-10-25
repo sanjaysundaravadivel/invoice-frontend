@@ -9,7 +9,9 @@ export const TestData3 = {
     "Retail",
     "NA"
   ],
-
+  headers:['#', 'ItemDescription', 'Quantity', 'Unitprice()', 'Total()'],
+  values:[['1', 'Services', '12', '125.00', '1500.00'],['2', 'vices', '199', '555.00', '8800.00'],["Subtotal","144.5"],["Tax","25%","4"],["Total","500"]
+],
   date: ["", 0],
 
   image:
