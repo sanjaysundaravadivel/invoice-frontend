@@ -32,10 +32,10 @@ const Page2Component = (props) => {
   const [data, setData] = useState({
     address: ["", ""],
 
-    date: ["", ""],
-    invono: ["", ""],
+    date: [{text:""}, ""],
+    invono: [{text:""}, ""],
 
-    total: ["", ""],
+    total: [{text:""}, ""],
     image: "",
     category:[
       "",
@@ -70,7 +70,7 @@ const Page2Component = (props) => {
 
   const setBg = (index) => {
     if (index == 0) {
-      return data.invono[0] != "" && data.invono[1] > 0.6
+      return data.invono[0].text != "" && data.invono[1] > 0.6
         ? { background: "green" }
         : { background: "red" };
     }
@@ -80,12 +80,12 @@ const Page2Component = (props) => {
         : { background: "red" };
     }
     if (index == 2) {
-      return data.date[0] != "" && data.date[1] > 0.6
+      return data.date[0].text != "" && data.date[1] > 0.6
         ? { background: "green" }
         : { background: "red" };
     }
     if (index == 3) {
-      return data.total[0] != "" && data.total[1] > 0.6
+      return data.total[0].text != "" && data.total[1] > 0.6
         ? { background: "green" }
         : { background: "red" };
     }
@@ -101,10 +101,10 @@ const Page2Component = (props) => {
     formData1.append("files[]", props.file);
     let res = { data: {  address: ["", ""],
 
-    date: ["", ""],
-    invono: ["", ""],
+    date:  [{text:""}, ""],
+    invono: [{text:""}, ""],
 
-    total: ["", ""],
+    total: [{text:""}, ""],
     image: "",
     category:[
       "",
@@ -196,7 +196,7 @@ const Page2Component = (props) => {
     console.log(res.data);
     if (edit == 0) {
       let temp = data;
-      temp.invono[0] = txt;
+      temp.invono[0].text = txt;
       temp.invono[1] = "0.99";
       setTxt(txt);
       setData(temp);
@@ -210,7 +210,7 @@ const Page2Component = (props) => {
     }
     if (edit == 2) {
       let temp = data;
-      temp.date[0] = txt;
+      temp.date[0].text = txt;
       temp.date[1] = "0.99";
       setTxt(txt);
       setData(temp);
@@ -218,7 +218,7 @@ const Page2Component = (props) => {
     if (edit == 3) {
       let temp = data;
       setTxt(txt);
-      temp.total[0] = txt;
+      temp.total[0].text = txt;
       temp.total[1] = "0.99";
       setData(temp);
     }
@@ -230,7 +230,7 @@ const Page2Component = (props) => {
   const revert = () => {setImg(prev);
     if (edit == 0) {
       let temp = data;
-      temp.invono[0] = prevTxt;
+      temp.invono[0].text = prevTxt;
       temp.invono[1] = prevScore;
       setData(temp);
     }
@@ -242,13 +242,13 @@ const Page2Component = (props) => {
     }
     if (edit == 2) {
       let temp = data;
-      temp.date[0] = prevTxt;
+      temp.date[0].text = prevTxt;
       temp.date[1] = prevScore;
       setData(temp);
     }
     if (edit == 3) {
       let temp = data;
-      temp.total[0] = prevTxt;
+      temp.total[0].text = prevTxt;
       temp.total[1] = prevScore;
       setData(temp);
     }};
@@ -454,13 +454,13 @@ const Page2Component = (props) => {
                                 <input
                                   style={{ border: "none" }}
                                   className="typing-container"
-                                  value={data.invono[0]}
+                                  value={data.invono[0].text}
                                   onChange={(event) => {
                                     let temp = data;
-                                    temp.invono[0] = event.target.value;
+                                    temp.invono[0].text = event.target.value;
                                     setTxt(event.target.value);
                                     setData(temp);
-                                    console.log(temp.invono[0]);
+                                    console.log(temp.invono[0].text);
                                   }}
                                   readOnly={
                                     edit === 0 && disable ? false : true
@@ -475,7 +475,7 @@ const Page2Component = (props) => {
                                 className="Pen"
                                   onClick={(e) => {
                                     e.preventDefault();
-                                    setPrevTxt(data.invono[0])
+                                    setPrevTxt(data.invono[0].text)
                                     setPrevScore(data.invono[1])
                                     setEdit(0);
                                     setDisable(!disable);
@@ -595,13 +595,13 @@ const Page2Component = (props) => {
                                 <input
                                   style={{ border: "none" }}
                                   className="typing-container"
-                                  value={data.date[0]}
+                                  value={data.date[0].text}
                                   onChange={(event) => {
                                     let temp = data;
-                                    temp.date[0] = event.target.value;
+                                    temp.date[0].text = event.target.value;
                                     setTxt(event.target.value);
                                     setData(temp);
-                                    console.log(temp.date[0]);
+                                    console.log(temp.date[0].text);
                                   }}
                                   readOnly={
                                     edit === 2 && disable ? false : true
@@ -616,7 +616,7 @@ const Page2Component = (props) => {
                                 className="Pen"
                                   onClick={(e) => {
                                     e.preventDefault();
-                                    setPrevTxt(data.date[0])
+                                    setPrevTxt(data.date[0].text)
                                     setPrevScore(data.date[1])
                                     setEdit(2);
                                     setDisable(!disable);
@@ -640,13 +640,13 @@ const Page2Component = (props) => {
                                 <input
                                   style={{ border: "none" }}
                                   className="typing-container"
-                                  value={data.total[0]}
+                                  value={data.total[0].text}
                                   onChange={(event) => {
                                     let temp = data;
-                                    temp.total[0] = event.target.value;
+                                    temp.total[0].text = event.target.value;
                                     setTxt(event.target.value);
                                     setData(temp);
-                                    console.log(temp.total[0]);
+                                    console.log(temp.total[0].text);
                                   }}
                                   readOnly={
                                     edit === 3 && disable ? false : true
@@ -661,7 +661,7 @@ const Page2Component = (props) => {
                                 className="Pen"
                                   onClick={(e) => {
                                     e.preventDefault();
-                                    setPrevTxt(data.total[0])
+                                    setPrevTxt(data.total[0].text)
                                     setPrevScore(data.total[1])
                                     setEdit(3);
                                     setDisable(!disable);

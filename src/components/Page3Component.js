@@ -10,11 +10,10 @@ var yyyy = today.getFullYear();
 today = mm + '/' + dd + '/' + yyyy;
   const [data, setData] = useState({
     address: ["", ""],
+    date: [{text:""}, ""],
+    invono: [{text:""}, ""],
 
-    date: ["", ""],
-    invono: ["", ""],
-
-    total: ["", ""],
+    total: [{text:""}, ""],
     category:[
       "Retail",
       "NA"
@@ -164,7 +163,7 @@ today = mm + '/' + dd + '/' + yyyy;
                         <input
                           style={{ border: "none" }}
                           className="typing-container"
-                          value={data.invono[0]}
+                          value={data.invono[0].text}
                           readOnly={true}
                         />
                       </td>
@@ -181,7 +180,7 @@ today = mm + '/' + dd + '/' + yyyy;
                         <input
                           style={{ border: "none" }}
                           className="typing-container"
-                          value={data.date[0]}
+                          value={data.date[0].text}
                           readOnly={true}
                         />
                       </td>
@@ -250,7 +249,7 @@ today = mm + '/' + dd + '/' + yyyy;
                         <input
                           style={{ border: "none" }}
                           className="typing-container"
-                          value={data.total[0]}
+                          value={data.total[0].text}
                           readOnly={true}
                         />
                       </td>
