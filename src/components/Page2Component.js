@@ -18,8 +18,8 @@ import RectangleComponent from "./RectangleComponent";
 import { Link } from "react-router-dom";
 
 const Page2Component = (props) => {
-  let label = ["Invoice number", "Address", "Date", "Total","Category"];
-  let label1 = ["invono", "address", "date", "total","Category"];
+  let label = ["Invoice number", "Address", "Date", "Total","Category","Bill of Materials"];
+  let label1 = ["invono", "address", "date", "total","Category","table"];
   const [crop, setCrop] = useState(null);
   const [prevTxt, setPrevTxt] = useState('');
   const [prevScore, setPrevScore] = useState('');
@@ -173,7 +173,7 @@ const Page2Component = (props) => {
     console.log("Imageee",imageFile1);
     const formData2 = new FormData();
     formData2.append("crop[]", imageFile1);
-    formData2.append("label", label[edit]);
+    formData2.append("label", label1[edit]);
     // var reader = new FileReader();
     // reader.readAsDataURL(image); 
     // reader.onloadend = function() {
@@ -182,7 +182,11 @@ const Page2Component = (props) => {
     // }
     console.log("BBBB")
     console.log( crop)
-    let res = { data: "" };
+    let res={data:{text:""}}
+    if(edit===5){
+      res = { data: {headers:[],values:[]} };
+    }
+   
      try {
       res = await axios.post("https://invoice-api-digiverz.herokuapp.com/crop", formData2); 
      } catch (error) {
@@ -190,7 +194,7 @@ const Page2Component = (props) => {
      }
      console.log("Cropped",res)
    
-      const txt = res.data;
+    const txt = res.data.text;
     //const txt = "26/09/2022"
     setExtract(txt)
     console.log(res.data);
@@ -214,12 +218,20 @@ const Page2Component = (props) => {
       temp.date[1] = "0.99";
       setTxt(txt);
       setData(temp);
+      console.log("DDDDATA",data)
     }
     if (edit == 3) {
       let temp = data;
       setTxt(txt);
       temp.total[0].text = txt;
       temp.total[1] = "0.99";
+      setData(temp);
+    }
+    if (edit == 5) {
+      let temp = data;
+      setTxt(txt);
+      temp.headers = res.data;
+      temp.values = res.values;
       setData(temp);
     }
    
@@ -311,7 +323,7 @@ const Page2Component = (props) => {
             setCurrh={setCurrh}
             setCurrw={setCurrw}
           /> 
-          <img src={imageFile}></img>
+          
         </Modal.Body>
       </Modal>
       {spin ? (
@@ -333,7 +345,7 @@ const Page2Component = (props) => {
                           justifyContent: "space-between",
                         }}
                       >
-                        {disable && edit!==4 && edit!=5 ? (
+                        {disable && edit!==4 ? (
                           <>
                             {" "}
                             <h5 class="card-title" style={{fontFamily: `Arial, "Helvetica Neue", Helvetica, sans-serif`,fontStyle:"italic"}}>
@@ -508,7 +520,7 @@ const Page2Component = (props) => {
                                 >
                                   {data.address[0] == ""
                                     ? "---"
-                                    : data.address[0].substring(0, 6) +
+                                    : data.address[0] && data.address[0].substring(0, 6) +
                                       "  ...  "}
 
                                   <span
@@ -700,6 +712,7 @@ const Page2Component = (props) => {
                                   <option value="Automotive">Automotive</option>
                                   <option value="Retail">Retail</option>
                                   <option value="Food">Food</option>
+                                  <option value="Food">Healthcare</option>
                                   <option value="Electronics">Electronics</option>
                                 </select> :  <input
                           style={{ border: "none" }}
@@ -860,11 +873,13 @@ const Page2Component = (props) => {
                         <br/>
                         <br/>
                   <div className="TabFooter">
+                   
                     
                     {" "}
                     {predicted ? (
                       <></>
                     ) : (
+
                       <button
                         className="Predictbtn"
                         onClick={(event) => {

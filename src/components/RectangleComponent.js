@@ -49,9 +49,12 @@ const RectangleComponent = (props) => {
 
     // get context of the canvas
     ctx = canvasEle.getContext("2d");
-    const image = document.getElementById("myimg");
-    image.style.height = currh;
-    image.style.width = currw;
+    const image = new Image();
+    image.src = myImage;
+    //image.src= img1
+    // image.width=currw
+    // image.height=currh
+    
     console.log("After",image)
 
     console.log(currh, currw);
@@ -59,9 +62,11 @@ const RectangleComponent = (props) => {
 
     const timer = setTimeout(() => {
     
-      ctx.imageSmoothingQuality = 'high'
-      //ctx.scale(pixelRatio, pixelRatio)
-      ctx.drawImage(image,0,0, currw, currh);
+      
+      //ctx.scale(currw * pixelRatio, currh*pixelRatio)
+      console.log(imgw,imgh)
+      ctx.drawImage(image,0,0,currw,currh);
+      
 
       const r1Info = props.coordinates;
       const r1Style = { borderColor: "red", borderWidth: 2 };
@@ -110,12 +115,12 @@ const RectangleComponent = (props) => {
       <Modal.Body className="show-grid">
         <Container style={{width:"fit-content !important"}}>
         
-            <canvas ref={canvas}  width={currw * pixelRatio}
-  height={currh * pixelRatio} style={{ height: currh, width: currw }}>
-        <img ref={targetRef} id="myimg" src={myImage} alt=".." />
+            <canvas ref={canvas}  width={currw}
+  height={currh } style={{ height: currh , width: currw  }}>
+        
       </canvas>
       
-         
+      
 
                   </Container>
       </Modal.Body>
