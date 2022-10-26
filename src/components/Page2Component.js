@@ -200,6 +200,7 @@ const Page2Component = (props) => {
     console.log(res.data);
     if (edit == 0) {
       let temp = data;
+      temp.invono= [{text:""}, ""]
       temp.invono[0].text = txt;
       temp.invono[1] = "0.99";
       setTxt(txt);
@@ -207,13 +208,17 @@ const Page2Component = (props) => {
     }
     if (edit == 1) {
       let temp = data;
-      temp.address[0] = txt;
+      console.log(temp)
+      setExtract(res.data)
+      temp.address[0] = res.data;
       temp.address[1] = "0.99";
       setTxt(txt);
       setData(temp);
     }
     if (edit == 2) {
       let temp = data;
+      console.log(temp)
+      temp.date= [{text:""}, ""]
       temp.date[0].text = txt;
       temp.date[1] = "0.99";
       setTxt(txt);
@@ -222,6 +227,7 @@ const Page2Component = (props) => {
     }
     if (edit == 3) {
       let temp = data;
+      temp.total= [{text:""}, ""]
       setTxt(txt);
       temp.total[0].text = txt;
       temp.total[1] = "0.99";
